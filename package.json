@@ -1,0 +1,20 @@
+{
+  "name": "be-decked",
+  "version": "0.0.0",
+  "description": "",
+  "homepage": "https://github.com/bahrus/be-decked#readme",
+  "bugs": {
+    "url": "https://github.com/bahrus/be-decked/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/be-decked.git"
+  },
+  "license": "MIT",
+  "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
