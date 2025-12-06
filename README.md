@@ -1,7 +1,5 @@
 # be-decked-with
 
-# be-decked-with
-
 [![Playwright Tests](https://github.com/bahrus/be-decked-with/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-decked-with/actions/workflows/CI.yml)
 [![NPM version](https://badge.fury.io/js/be-decked-with.png)](http://badge.fury.io/js/be-decked-with)
 [![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-decked-with?style=for-the-badge)](https://bundlephobia.com/result?p=be-decked-with)
