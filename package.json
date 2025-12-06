@@ -1,14 +1,14 @@
 {
-  "name": "be-decked",
+  "name": "be-decked-with-with",
   "version": "0.0.0",
   "description": "",
-  "homepage": "https://github.com/bahrus/be-decked#readme",
+  "homepage": "https://github.com/bahrus/be-decked-with#readme",
   "bugs": {
-    "url": "https://github.com/bahrus/be-decked/issues"
+    "url": "https://github.com/bahrus/be-decked-with/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bahrus/be-decked.git"
+    "url": "git+https://github.com/bahrus/be-decked-with.git"
   },
   "license": "MIT",
   "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
