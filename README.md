@@ -1,4 +1,4 @@
-# be-decked-with
+# be-decked-with (😶‍🌫️)
 
 [![Playwright Tests](https://github.com/bahrus/be-decked-with/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-decked-with/actions/workflows/CI.yml)
 [![NPM version](https://badge.fury.io/js/be-decked-with.png)](http://badge.fury.io/js/be-decked-with)
@@ -81,7 +81,7 @@ It is easy to define alternative names for the attribute.  This package contains
 ```
 
 > [!NOTE]
-> A vscode extension to make navigation from the element adorned by the be-decked-with attribute to the target element [is available](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.idref).
+> A vscode extension to make navigation from the element adorned by the be-decked-with attribute to the target element [is available](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.idref).  [TODO] -- update the attribute list
 
 ## Remote templates
 

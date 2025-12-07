@@ -1,7 +1,15 @@
 {
   "name": "be-decked-with",
   "version": "0.0.0",
-  "description": "",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements",
+    "enhancement",
+    "behavior"
+  ],
+  "description": "Wrap DOM element inside a template",
   "homepage": "https://github.com/bahrus/be-decked-with#readme",
   "bugs": {
     "url": "https://github.com/bahrus/be-decked-with/issues"
@@ -15,6 +23,19 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "playwright test",
+    "serve": "node ./node_modules/spa-ssi/serve.js",
+    "safari": "npx playwright wk http://localhost:8000",
+    "update": "ncu -u && npm install"
+  },
+  "dependencies": {
+    "be-enhanced": "0.0.189",
+    "be-hive": "0.0.267",
+    "mount-observer": "0.0.111",
+    "trans-render": "0.0.960"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.57.0",
+    "spa-ssi": "0.0.25"
   }
 }
