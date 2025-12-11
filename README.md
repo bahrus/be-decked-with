@@ -81,7 +81,7 @@ It is easy to define alternative names for the attribute.  This package contains
 ```
 
 > [!NOTE]
-> A vscode extension to make navigation from the element adorned by the be-decked-with attribute to the target element [is available](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.idref).  [TODO] -- update the attribute list
+> A vscode extension to make navigation from the element adorned by the be-decked-with attribute to the target element [is available](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.idref).  
 
 ## Remote templates
 
