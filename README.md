@@ -69,6 +69,12 @@ So the markup above results in:
 </fieldset>
 ```
 
+## Wouldn't it be better for the server or build process to do this?
+
+Maybe, it depends.  If multiple elements need to be wrapped with the same wrapper, it could actually be close to a wash or even a small advantage to do it in the client, which this enhancement supports.
+
+But I think it is quite reasonable to use server and build processes that can also apply this wrapping, where it proves moe efficacious to do so.
+
 ## Compact alternative name
 
 It is easy to define alternative names for the attribute.  This package contains one such alternative name:  😶‍🌫️:
