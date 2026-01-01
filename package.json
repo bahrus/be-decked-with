@@ -30,12 +30,12 @@
   },
   "dependencies": {
     "be-enhanced": "0.0.189",
-    "be-hive": "0.0.267",
-    "mount-observer": "0.0.111",
-    "trans-render": "0.0.960"
+    "be-hive": "0.0.268",
+    "mount-observer": "0.0.112",
+    "trans-render": "0.0.961"
   },
   "devDependencies": {
     "@playwright/test": "1.57.0",
-    "spa-ssi": "0.0.25"
+    "spa-ssi": "0.0.26"
   }
 }
