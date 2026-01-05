@@ -178,6 +178,24 @@ class BeDeckedWith extends BE {
         const slot = clone.querySelector('slot');
         if (!slot) throw 404;
 
+        // Check for placeholder element inside slot that matches adorned element's tag name
+        if (enhancedElement instanceof HTMLElement) {
+            const tagName = enhancedElement.tagName.toLowerCase();
+            const placeholder = slot.querySelector(tagName);
+            
+            if (placeholder instanceof HTMLElement) {
+                // Extract attributes from placeholder and apply to adorned element
+                Array.from(placeholder.attributes).forEach(attr => {
+                    // Skip data attributes
+                    if (!attr.name.startsWith('data-')) {
+                        // Apply dynamic placeholder substitution to attribute values
+                        const substituted = replacePlaceholders(attr.value, enhancedElement);
+                        enhancedElement.setAttribute(attr.name, substituted);
+                    }
+                });
+            }
+        }
+
         enhancedElement.after(clone);
         const parentOfSlot = slot.parentElement;
         if(parentOfSlot && 'moveBefore' in parentOfSlot){

@@ -77,7 +77,7 @@ But I think it is quite reasonable to use server and build processes that can al
 
 ## Related enhancements
 
-If what is needed is more complex interspersing / weaving together of templates, consider [be-inclusive](https://github.com/bahrus/be-inclusive).
+If what is needed is more complex interspersing / weaving together of templates, consider [be-inclusive](https://github.com/bahrus/be-inclusive) or [be-imbued](https://github.com/bahrus/be-imbued).
 
 ## Compact alternative name
 
@@ -127,6 +127,66 @@ To pull in wrapper from an external html link, this must be mapped via import ma
 
 > [!NOTE]
 > Another [vs code extension](https://marketplace.visualstudio.com/items?itemName=andersonbruceb.custom-link-attributes) is available that specializes in supporting the be-decked-with-src/😶‍🌫️-src navigation to the source document.
+
+## Support for applying dynamic attributes to the adorned element.
+
+If we place a placeholder inside the slot element whose tag name matches the name of the adorned element, with dynamic attributes, those attributes get applied to to the adorned element.
+
+So for example:
+
+```html
+<template id=myWrappingContent>
+    <fieldset>
+        <legend>{{dataset.label}}</legend>
+        <label>
+            <span>{{dataset.label}}</span>
+            <slot>
+                <select aria-label={{dataset.label}}></select>
+            </slot>
+        </label>
+    </fieldset>
+</template>
+
+...
+
+<select 
+    data-label=Country
+    be-decked-with=myWrappingContent>
+    <option value="">Select a country</option>
+    <option value="us">United States</option>
+    <option value="uk">United Kingdom</option>
+    <option value="ca">Canada</option>
+    <option value="au">Australia</option>
+    <option value="de">Germany</option>
+    <option value="fr">France</option>
+    <option value="jp">Japan</option>
+</select>
+```
+
+... generates:
+
+```html
+<fieldset>
+    <legend>Country></legend>
+    <label>
+        <span>Country</span>
+        <select aria-label=Country
+            data-label=Country
+            be-decked-with=myWrappingContent>
+            <option value="">Select a country</option>
+            <option value="us">United States</option>
+            <option value="uk">United Kingdom</option>
+            <option value="ca">Canada</option>
+            <option value="au">Australia</option>
+            <option value="de">Germany</option>
+            <option value="fr">France</option>
+            <option value="jp">Japan</option>
+        </select>
+    </label>
+</fieldset>
+```
+
+
 
 ## Viewing Locally
 

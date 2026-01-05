@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Attributes</title>
+    <!-- #include virtual="/imports.html" -->
+    <script type=module>
+        import '/emc.js';
+    </script>
+</head>
+<body>
+    <template id=myWrappingContent>
+        <fieldset class=select-wrapper>
+            <legend>{{dataset.label}}</legend>
+            <label>
+                <span>{{dataset.label}}</span>
+                <slot>
+                    <select aria-label={{dataset.label}}></select>
+                </slot>
+            </label>
+        </fieldset>
+        <style>
+            .select-wrapper legend {
+                display: none;
+            }
+        </style>
+    </template>
+
+    <select 
+        data-label=Country
+        be-decked-with=myWrappingContent>
+        <option value="">Select a country</option>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="ca">Canada</option>
+        <option value="au">Australia</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="jp">Japan</option>
+    </select>
+
+    <div id='target'></div>
+
+    <script>
+        function runTest(){
+            const select = document.querySelector('select');
+            if(select && select.getAttribute('aria-label') === 'Country'){
+                target.setAttribute('mark', 'good');
+            }
+        }
+
+        setTimeout(() => {
+            runTest();
+        }, 1000)
+    </script>
+</body>
+</html>
