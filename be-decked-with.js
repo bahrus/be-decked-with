@@ -6,6 +6,11 @@
 /** @import { AllProps, Actions, PAP } from './types/be-decked-with/types' */
 
 /**
+ * @type {EMC<any, AllProps, Element, RAConfig<AllProps, Actions>>}
+ */
+import emc from './emc.json' with {type: 'json'};
+
+/**
  * @implements {Actions}
  * 
  */
@@ -25,7 +30,7 @@ export class BeDeckedWith {
      * 
      * @param {Element & ElementEnhancementGateway} enhancedElement 
      * @param {*} ctx 
-     * @param {AllProps} initVals 
+     * @param {PAP} initVals 
      */
     constructor(enhancedElement, ctx, initVals){
         this.#enhancedElementRef = new WeakRef(enhancedElement);
