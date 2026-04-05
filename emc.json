@@ -1,0 +1,25 @@
+{
+    "enhConfig": {
+        "enhKey": "BeDeckedWith",
+        "spawn": "be-decked-with/be-decked-with.js",
+        "withAttrs": {
+            "base": "be-decked-with",
+            "_base": {
+                "instanceOf": "String",
+                "mapsTo": "path"
+            },
+            "src": "${base}-src",
+            "_src": {
+                "instanceOf": "String",
+                "mapsTo": "src"
+            }
+        }
+    },
+    "customData": {
+        "compacts": {
+            "when_path_changes_call_upShadowSearch": 0,
+            "when_template_changes_call_act": 0,
+            "when_src_changes_call_fetchRemoteTemplate": 0
+        }
+    }
+}
