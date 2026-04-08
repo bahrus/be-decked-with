@@ -63,7 +63,7 @@ export class BeDeckedWith {
             ...customData,
             vm: this,
         };
-        (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
+        await (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
         (await import('assign-gingerly/assignGingerly.js')).assignGingerly(self, {
 
             ...initVals
