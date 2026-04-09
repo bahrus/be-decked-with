@@ -1,0 +1,9 @@
+{
+    "enhConfig": {
+        "enhKey": "😶‍🌫️",
+        "spawn": "be-decked-with/be-decked-with.js",
+        "withAttrs": {
+            "base": "😶‍🌫️"
+        }
+    }
+}

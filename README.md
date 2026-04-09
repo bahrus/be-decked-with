@@ -81,7 +81,7 @@ If what is needed is more complex interspersing / weaving together of templates,
 
 ## Compact alternative name
 
-It is easy to define alternative names for the attribute.  This package contains one such alternative name:  😶‍🌫️:
+It is easy to define alternative names for the attribute.  This package contains one such alternative name:  😶‍🌫️ (face in clouds emoji):
 
 ```html
 <select 

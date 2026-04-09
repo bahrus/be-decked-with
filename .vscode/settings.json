@@ -1,4 +1,8 @@
 {
+    "explorer.fileNesting.patterns": {
+        "*.mjs": "${capture}.json"
+    },
+    "explorer.fileNesting.enabled": true,
     "workbench.colorCustomizations": {
         "activityBar.background": "#233212",
         "titleBar.activeBackground": "#324619",
