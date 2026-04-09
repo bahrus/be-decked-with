@@ -2,6 +2,7 @@ import {emc as baseEmc} from './emc.mjs';
 /** @import {EMC} from './types/mount-observer/types' */;
 /** @import {AllProps} from './types/be-decked-with/types' */
 
+console.log({emc});
 /**
  * @type {EMC<any, AllProps> }
  */
@@ -10,6 +11,7 @@ const emc = {
         ...baseEmc.enhConfig,
         enhKey: '😶‍🌫️',
         withAttrs: {
+            ...baseEmc.withAttrs,
             base: '😶‍🌫️'
         }
     }

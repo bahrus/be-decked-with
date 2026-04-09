@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dynamic Attributes</title>
     <!-- #include virtual="/imports.html" -->
-    <script type=module>
-        import '/emc.js';
-    </script>
+
 </head>
 <body>
     <template id=myWrappingContent>
@@ -41,7 +39,13 @@
     </select>
 
     <div id='target'></div>
-
+    
+    <be-hive>
+        <script type=emc src="be-decked-with/emc.mjs"></script>
+    </be-hive>
+    <script type=module>
+        import 'be-hive/be-hive.js';
+    </script>
     <script>
         function runTest(){
             const select = document.querySelector('select');
