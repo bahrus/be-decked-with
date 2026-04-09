@@ -3,7 +3,16 @@
         "enhKey": "😶‍🌫️",
         "spawn": "be-decked-with/be-decked-with.js",
         "withAttrs": {
-            "base": "😶‍🌫️"
+            "base": "😶‍🌫️",
+            "_base": {
+                "instanceOf": "String",
+                "mapsTo": "path"
+            },
+            "src": "${base}-src",
+            "_src": {
+                "instanceOf": "String",
+                "mapsTo": "src"
+            }
         }
     }
 }
