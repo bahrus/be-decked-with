@@ -25,6 +25,9 @@ export const emc = {
         },
     },
     customData: {
+        weakRef: {
+            properties: ['enhancedElement']
+        },
         compacts: {
             when_path_changes_call_upShadowSearch: 0,
             when_template_changes_call_act: 0,

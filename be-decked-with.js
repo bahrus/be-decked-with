@@ -28,46 +28,36 @@ const remoteTemplateLookup = new Map();
 export class BeDeckedWith {
 
     /**
-     * @type {WeakRef<Element & ElementEnhancementGateway>}
-     */
-    #enhancedElementRef;
-    get enhancedElement() {
-        const ref = this.#enhancedElementRef.deref();
-        if (ref === undefined) throw 404;
-        return ref;
-    }
-
-    /**
-     * 
+     * @this {AllProps & Actions}
      * @param {Element & ElementEnhancementGateway} enhancedElement 
      * @param {*} ctx 
      * @param {PAP} initVals 
      */
     constructor(enhancedElement, ctx, initVals) {
-        this.#enhancedElementRef = new WeakRef(enhancedElement);
-        const self = /** @type {AllProps & Actions} */(/** @type {unknown} */(this));
-        self.init(self, initVals);
+        this.init(this, enhancedElement, initVals);
     }
 
     /**
-     * @this {AllProps & Actions}
      * @param {AllProps} self 
+     * @param {Element & ElementEnhancementGateway} enhancedElement 
      * @param {PAP} initVals 
      */
-    async init(self, initVals) {
+    async init(self, enhancedElement, initVals) {
         const { customData } = emc;
+        const { defaultPropVals } = customData;
         /**
          * @type {RoundaboutOptions}
          */
         const raOptions = {
             ...customData,
-            vm: this,
+            vm: self,
+            initialPropVals: {
+                enhancedElement,
+                ...defaultPropVals,
+                ...initVals
+            }
         };
         await (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
-        (await import('assign-gingerly/assignGingerly.js')).assignGingerly(self, {
-
-            ...initVals
-        });
     }
 
     /**
