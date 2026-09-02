@@ -7,6 +7,10 @@
 
 Surround the adorned element with content from a common, reusable template.
 
+Sometimes, styling with css alone isn't sufficient.  Sometimes, to properly "style" an element like the now customizable select element, we need to wrap the element inside some HTML tags that primarily provide look and feel improvements.
+
+Doing so on every such element adds a lot of noise to the markup, just as minute styling instructions would.  *be-decked-with* aims to solve this problem.
+
 Specifically, what *be-decked-with* does is it takes the following HTML:
 
 
