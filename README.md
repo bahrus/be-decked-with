@@ -188,28 +188,21 @@ So for example:
 
 
 
-## Viewing Locally
+## Viewing Demos Locally
 
-Any web server that serves static files (html, css, js) will do but...
+1. Install git
+2. Fork/clone this repo
+3. Install node.js
+4. Open command window to folder where you cloned this repo
+5. > git submodule add https://github.com/bahrus/types.git types
+6. > git submodule update --init --recursive
+7. > npm install
+8. > npm run build
+9. > npm run serve
+10. Open http://localhost:8000/demo/ in a modern browser
 
-1.  Install git.
-2.  Fork/clone this repo.
-3.  Install node.
-4.  Open command window to folder where you cloned this repo.
-5.  > npm install
-6.  > npm run serve
-7.  Open http://localhost:8000/demo in a modern browser.
+## Running Tests
 
-## Importing in ES Modules:
-
-```JavaScript
-import 'be-decked-with/be-decked-with.js';
 ```
-
-## Using from CDN:
-
-```html
-<script type=module crossorigin=anonymous>
-    import 'https://esm.run/be-decked-with';
-</script>
+> npm run test
 ```
