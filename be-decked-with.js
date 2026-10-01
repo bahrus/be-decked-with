@@ -5,11 +5,6 @@
 
 /** @import { AllProps, Actions, PAP } from './types/be-decked-with/types' */
 
-/**
- * @type {EMC<any, AllProps, Element, RAConfig<AllProps, Actions>>}
- */
-import emc from './emc.json' with {type: 'json'};
-
 /** @type {WeakSet<HTMLTemplateElement>} */
 const cleansed = new WeakSet();
 
@@ -30,21 +25,24 @@ export class BeDeckedWith {
     /**
      * @this {AllProps & Actions}
      * @param {Element & ElementEnhancementGateway} enhancedElement 
-     * @param {*} ctx 
-     * @param {PAP} initVals 
+     * @param {SpawnContext} ctx
+     * @param {PAP} initVals
      */
     constructor(enhancedElement, ctx, initVals) {
-        this.init(this, enhancedElement, initVals);
+        this.init(this, enhancedElement, ctx, initVals);
     }
 
     /**
-     * @param {AllProps} self 
-     * @param {Element & ElementEnhancementGateway} enhancedElement 
-     * @param {PAP} initVals 
+     * @param {AllProps} self
+     * @param {Element & ElementEnhancementGateway} enhancedElement
+     * @param {SpawnContext} ctx
+     * @param {PAP} initVals
      */
-    async init(self, enhancedElement, initVals) {
-        const { customData } = emc;
-        const { defaultPropVals } = customData;
+    async init(self, enhancedElement, ctx, initVals) {
+        // ctx.emc is only populated on the attribute (mount-observer) path;
+        // enh.get() / enh.set only pass the registry item -- see def.js.
+        const { customData } = /** @type {EMC<any, AllProps, Element, RAConfig<AllProps, Actions>>} */ (ctx.emc || ctx.config);
+        const defaultPropVals = customData?.defaultPropVals;
         /**
          * @type {RoundaboutOptions}
          */
@@ -58,6 +56,7 @@ export class BeDeckedWith {
             }
         };
         await (await import('roundabout-lib/roundabout.js')).roundabout(raOptions);
+        self.initialized = true;
     }
 
     /**
@@ -111,8 +110,13 @@ export class BeDeckedWith {
      * @param {AllProps} self 
      */
     act(self) {
-        const { template, enhancedElement } = self;
-
+        const { enhancedElement, resolved } = self;
+        // The wrapping is a one-time transformation of the DOM.
+        if (resolved) return /** @type {PAP} */ ({});
+        // Programmatic callers may pass the template element itself, or a WeakRef to it.
+        const template = self.template instanceof WeakRef ? self.template.deref() : self.template;
+        // A collected template is a no-op, never an error.
+        if (!(template instanceof HTMLTemplateElement)) return /** @type {PAP} */ ({});
 
         if (!cleansed.has(template)) {
             cleansed.add(template);
@@ -224,10 +228,10 @@ export class BeDeckedWith {
 
         slot.remove();
 
-
-
         return /** @type {PAP} */ ({
             resolved: true,
+            // Don't keep the template alive just because this element was once decked with it.
+            template: new WeakRef(template),
         });
     }
 }

@@ -190,7 +190,59 @@ So for example:
 </fieldset>
 ```
 
+## Programmatic attachment (no attribute)
 
+The attribute syntax shown above shines for server-rendered HTML and progressive enhancement:  the markup alone says which wrapper decks which element.  But most web development today renders on the client, with a framework (Lit, React, Vue, Svelte, etc.) that already has a JavaScript reference to each element it creates.  In that setting, attaching be-decked-with programmatically is the better fit:
+
+1.  **A less clunky API.**  Frameworks tend to be awkward about setting arbitrary (let alone emoji) attributes like `😶‍🌫️-src="be-decked-with/demo/template.html"`.  And the attribute can only name a template by id, which then has to be searched for, up through the shadow DOM realms.  Programmatically, you can hand be-decked-with the `template` element itself (or a `WeakRef` to it), whether or not it has an id, or is even in the DOM.
+2.  **Less stringifying and parsing.**  With an attribute, the framework serializes the template reference to a string, and be-decked-with then parses the attribute and looks the id up again.  Setting `template` directly skips all of that.
+3.  **Less overhead monitoring attributes.**  The attribute approach relies on [be-hive](https://github.com/bahrus/be-hive) / [mount-observer](https://github.com/bahrus/mount-observer) watching the DOM for elements that carry (or gain) the attribute, and for changes to its value.  The programmatic approach needs none of that -- `def.js` just registers the enhancement's config, and the enhancement is attached exactly when, and to exactly the elements, your code says.
+
+Both approaches produce the same enhancement, with the same `{{...}}` substitution and placeholder-attribute rules, so you can mix them in one app -- attributes for server-rendered islands, programmatic attachment inside client-rendered components.
+
+First register the enhancement's config once:
+
+```JS
+import { defBeDeckedWith } from 'be-decked-with/def.js';
+const emc = await defBeDeckedWith(document.body); // or a shadow root's host, for a scoped registry
+```
+
+Then set one of these properties:
+
+| Attribute                        | Property   | Notes                                                                                      |
+|----------------------------------|------------|--------------------------------------------------------------------------------------------|
+| `be-decked-with` / `😶‍🌫️`         | `path`     | The id of a template, searched for up through the shadow DOM realms.                       |
+| `be-decked-with-src` / `😶‍🌫️-src` | `src`      | An import-map-resolvable url of an html file containing the wrapper.                       |
+| *(none)*                         | `template` | An `HTMLTemplateElement`, or a `WeakRef` to one.  Only available programmatically.         |
+
+### Declarative -- via `enh.set`
+
+```JS
+// equivalent to <select data-label=Country be-decked-with=myWrappingContent>
+select.enh.set.beDeckedWith.path = 'myWrappingContent';
+```
+
+Only the first property needs `.set` -- it's what triggers the attachment.  This can be done before or after `defBeDeckedWith` has been called.
+
+### Imperative -- via `enh.get()`
+
+```JS
+select.enh.get(emc).template = myWrappingTemplate;
+```
+
+or, for a remote wrapper:
+
+```JS
+// equivalent to <select data-label=Country be-decked-with-src="be-decked-with/demo/template.html">
+select.enh.get(emc).src = 'be-decked-with/demo/template.html';
+```
+
+### Differences from the attribute path
+
+*  The wrapping is a one-time transformation of the DOM.  Once an element has been decked, setting `path`, `src` or `template` again does nothing.
+*  be-decked-with doesn't keep the template alive. After the element is decked, the enhancement holds the template only through a `WeakRef`. If you pass a `WeakRef` to a template that's not in the DOM, keep your own reference to the template until the element has been decked. (Remote templates fetched via `src` are cached by url, and stay alive.)
+
+See [demo/Programmatic](demo/Programmatic/) for runnable examples.
 
 ## Viewing Demos Locally
 

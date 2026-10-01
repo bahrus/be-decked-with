@@ -9,7 +9,7 @@
  */
 export const emc = {
     enhConfig: {
-        enhKey: 'BeDeckedWith',
+        enhKey: 'beDeckedWith',
         spawn: 'be-decked-with/be-decked-with.js',
         withAttrs: {
             base: 'be-decked-with',
@@ -28,10 +28,22 @@ export const emc = {
         weakRef: {
             properties: ['enhancedElement']
         },
-        compacts: {
-            when_path_changes_call_upShadowSearch: 0,
-            when_template_changes_call_act: 0,
-            when_src_changes_call_fetchRemoteTemplate: 0,
+        // actions rather than compacts:  actions are also evaluated once on
+        // initialization, which picks up values assigned programmatically
+        // (enh.get / enh.set) before roundabout has finished wiring up.
+        actions: {
+            upShadowSearch: {
+                ifAllOf: ['enhancedElement', 'path'],
+                ifNoneOf: ['resolved'],
+            },
+            fetchRemoteTemplate: {
+                ifAllOf: ['enhancedElement', 'src'],
+                ifNoneOf: ['resolved'],
+            },
+            act: {
+                ifAllOf: ['enhancedElement', 'template'],
+                ifNoneOf: ['resolved'],
+            },
         }
     }
 };

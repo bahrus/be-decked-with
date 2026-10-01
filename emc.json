@@ -1,6 +1,6 @@
 {
     "enhConfig": {
-        "enhKey": "BeDeckedWith",
+        "enhKey": "beDeckedWith",
         "spawn": "be-decked-with/be-decked-with.js",
         "withAttrs": {
             "base": "be-decked-with",
@@ -21,10 +21,34 @@
                 "enhancedElement"
             ]
         },
-        "compacts": {
-            "when_path_changes_call_upShadowSearch": 0,
-            "when_template_changes_call_act": 0,
-            "when_src_changes_call_fetchRemoteTemplate": 0
+        "actions": {
+            "upShadowSearch": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "path"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            },
+            "fetchRemoteTemplate": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "src"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            },
+            "act": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "template"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            }
         }
     }
 }

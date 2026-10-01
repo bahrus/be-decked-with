@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic declarative in sequence</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <template id=myWrappingContent>
+        <fieldset class=select-wrapper>
+            <legend>{{dataset.label}}</legend>
+            <label>
+                <span>{{dataset.label}}</span>
+                <slot></slot>
+            </label>
+        </fieldset>
+        <style>
+            .select-wrapper legend {
+                display: none;
+            }
+        </style>
+    </template>
+
+    <select id=country data-label=Country>
+        <option value="">Select a country</option>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="ca">Canada</option>
+        <option value="au">Australia</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="jp">Japan</option>
+    </select>
+
+    <script type=module>
+        import {defBeDeckedWith} from 'be-decked-with/def.js';
+        await defBeDeckedWith(document.body);
+        // equivalent to <select be-decked-with=myWrappingContent>
+        // Only the first property needs to go through .set --
+        // it triggers the attachment of the enhancement.
+        country.enh.set.beDeckedWith.path = 'myWrappingContent';
+        setTimeout(() => {
+            const legend = country.closest('fieldset')?.querySelector('legend');
+            if(legend?.textContent === 'Country' && country.parentElement.localName === 'label'
+                && document.querySelectorAll('slot').length === 0){
+                target.setAttribute('mark', 'good');
+            }
+        }, 1000);
+    </script>
+    <div id=target></div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic imperative</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <template id=myWrappingContent>
+        <fieldset class=select-wrapper>
+            <legend>{{dataset.label}}</legend>
+            <label>
+                <span>{{dataset.label}}</span>
+                <slot></slot>
+            </label>
+        </fieldset>
+        <style>
+            .select-wrapper legend {
+                display: none;
+            }
+        </style>
+    </template>
+
+    <select id=country data-label=Country>
+        <option value="">Select a country</option>
+        <option value="us">United States</option>
+        <option value="uk">United Kingdom</option>
+        <option value="ca">Canada</option>
+        <option value="au">Australia</option>
+        <option value="de">Germany</option>
+        <option value="fr">France</option>
+        <option value="jp">Japan</option>
+    </select>
+
+    <select id=language data-label=Language>
+        <option value="">Select a language</option>
+        <option value="en">English</option>
+        <option value="fr">French</option>
+        <option value="ja">Japanese</option>
+    </select>
+
+    <select id=currency data-label=Currency>
+        <option value="">Select a currency</option>
+        <option value="usd">US Dollar</option>
+        <option value="eur">Euro</option>
+        <option value="jpy">Yen</option>
+    </select>
+
+    <script type=module>
+        import {defBeDeckedWith} from 'be-decked-with/def.js';
+        const emc = await defBeDeckedWith(document.body);
+        // Pass the template element itself -- no id lookup needed.
+        country.enh.get(emc).template = myWrappingContent;
+        // ...or a WeakRef to it.
+        language.enh.get(emc).template = new WeakRef(myWrappingContent);
+        // equivalent to <select be-decked-with-src="be-decked-with/demo/template.html">
+        currency.enh.get(emc).src = 'be-decked-with/demo/template.html';
+        setTimeout(() => {
+            const ok = [[country, 'Country'], [language, 'Language'], [currency, 'Currency']].every(([el, label]) =>
+                el.closest('fieldset')?.querySelector('legend')?.textContent === label
+                && el.parentElement.localName === 'label'
+            );
+            // the (local) template's style is hoisted into the document once, not once per element
+            const localStyles = [...document.head.querySelectorAll('style')].length;
+            if(ok && localStyles === 2 && document.querySelectorAll('fieldset').length === 3){
+                target.setAttribute('mark', 'good');
+            }
+        }, 1500);
+    </script>
+    <div id=target></div>
+</body>
+</html>

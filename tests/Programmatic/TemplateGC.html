@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programmatic template GC</title>
+    <!-- #include virtual="/imports.html" -->
+</head>
+<body>
+    <template id=gcTemplate>
+        <fieldset class=gc-wrapper>
+            <legend>{{dataset.label}}</legend>
+            <slot></slot>
+        </fieldset>
+        <style>
+            .gc-wrapper { border-color: red; }
+        </style>
+    </template>
+    <template id=liveTemplate>
+        <fieldset class=live-wrapper>
+            <legend>{{dataset.label}}</legend>
+            <slot></slot>
+        </fieldset>
+    </template>
+
+    <select id=byElement data-label=ByElement><option>a</option></select>
+    <select id=byWeakRef data-label=ByWeakRef><option>b</option></select>
+    <select id=later data-label=Later><option>c</option></select>
+
+    <script type=module>
+        import {defBeDeckedWith} from 'be-decked-with/def.js';
+        const emc = await defBeDeckedWith(document.body);
+        globalThis.emc = emc;
+        // Set up inside a function scope, so this page keeps no reference of its own
+        // to #gcTemplate -- only the DOM (until the test removes it) and the enhancements.
+        (() => {
+            const t = document.querySelector('#gcTemplate');
+            document.querySelector('#byElement').enh.get(emc).template = t;
+            document.querySelector('#byWeakRef').enh.get(emc).template = new WeakRef(t);
+        })();
+    </script>
+</body>
+</html>

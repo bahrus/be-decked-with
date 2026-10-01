@@ -21,7 +21,18 @@
   "license": "MIT",
   "author": "Bruce B. Anderson <anderson.bruce.b@gmail.com>",
   "type": "module",
-  "main": "index.js",
+  "main": "be-decked-with.js",
+  "module": "be-decked-with.js",
+  "exports": {
+    ".": "./be-decked-with.js",
+    "./be-decked-with.js": "./be-decked-with.js",
+    "./def.js": "./def.js",
+    "./emc.json": "./emc.json",
+    "./emc.mjs": "./emc.mjs",
+    "./😶‍🌫️.json": "./😶‍🌫️.json",
+    "./😶‍🌫️.mjs": "./😶‍🌫️.mjs"
+  },
+  "types": "./types/be-decked-with/types.d.ts",
   "scripts": {
     "build": "node emc.mjs > emc.json && node 😶‍🌫️.mjs > 😶‍🌫️.json",
     "test": "playwright test",
@@ -30,6 +41,7 @@
     "update": "ncu -u && npm install"
   },
   "dependencies": {
+    "assign-gingerly": "0.0.97",
     "be-hive": "0.1.18",
     "mount-observer": "0.1.53",
     "roundabout-lib": "0.0.38"

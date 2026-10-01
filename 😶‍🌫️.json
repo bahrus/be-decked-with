@@ -14,5 +14,41 @@
                 "mapsTo": "src"
             }
         }
+    },
+    "customData": {
+        "weakRef": {
+            "properties": [
+                "enhancedElement"
+            ]
+        },
+        "actions": {
+            "upShadowSearch": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "path"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            },
+            "fetchRemoteTemplate": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "src"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            },
+            "act": {
+                "ifAllOf": [
+                    "enhancedElement",
+                    "template"
+                ],
+                "ifNoneOf": [
+                    "resolved"
+                ]
+            }
+        }
     }
 }
